@@ -1,0 +1,197 @@
+/* ---------- Keyframes ---------- */
+
+@keyframes float-y {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-14px); }
+}
+
+@keyframes float-tilt {
+  0%, 100% { transform: translate(0, 0) rotate(-1.5deg); }
+  50% { transform: translate(6px, -12px) rotate(1.5deg); }
+}
+
+@keyframes drift {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(40px, 24px) scale(1.12); }
+  66% { transform: translate(-24px, 44px) scale(0.94); }
+}
+
+@keyframes shimmer {
+  to { background-position: 200% center; }
+}
+
+@keyframes sweep {
+  to { left: 140%; }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.7); }
+  70%, 100% { box-shadow: 0 0 0 10px rgba(74, 222, 128, 0); }
+}
+
+@keyframes riseIn {
+  from { opacity: 0; transform: translateY(28px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes dropIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- Floating ---------- */
+
+.float-slow {
+  animation: float-y 7s ease-in-out infinite;
+}
+
+.float-a {
+  animation: float-tilt 5.5s ease-in-out infinite;
+}
+
+.float-b {
+  animation: float-tilt 6.5s ease-in-out -2s infinite;
+}
+
+.float-c {
+  animation: float-y 5s ease-in-out -1s infinite;
+}
+
+.float-icon {
+  animation: float-y 4.5s ease-in-out infinite;
+}
+
+.card:nth-child(2) .float-icon {
+  animation-delay: -1.5s;
+}
+
+.card:nth-child(3) .float-icon {
+  animation-delay: -3s;
+}
+
+.blob-a { animation: drift 16s ease-in-out infinite; }
+.blob-b { animation: drift 20s ease-in-out -6s infinite; }
+.blob-c { animation: drift 18s ease-in-out -3s infinite; }
+.blob-d { animation: drift 22s ease-in-out infinite; }
+.blob-e { animation: drift 19s ease-in-out -8s infinite; }
+
+/* Hover pauses the bob so the element does not fight the cursor. */
+.card:hover .float-icon {
+  animation-play-state: paused;
+  transform: scale(1.12) rotate(-6deg);
+}
+
+/* ---------- Page-load entrance ---------- */
+
+.rise {
+  opacity: 0;
+  animation: riseIn 0.9s var(--ease) forwards;
+  animation-delay: var(--d, 0ms);
+}
+
+/* ---------- Scroll reveal ---------- */
+
+.js .reveal {
+  opacity: 0;
+  transition: opacity 0.9s var(--ease), transform 0.9s var(--ease);
+}
+
+.js .reveal-up { transform: translateY(40px); }
+.js .reveal-left { transform: translateX(-48px); }
+.js .reveal-right { transform: translateX(48px); }
+.js .reveal-zoom { transform: scale(0.9) translateY(24px); }
+
+.js .reveal.in {
+  opacity: 1;
+  transform: none;
+}
+
+/* ---------- Reduced motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .rise,
+  .js .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ---------- Extras ---------- */
+
+@keyframes bubble {
+  0% { transform: translateY(0) translateX(0) scale(0.6); opacity: 0; }
+  12% { opacity: 1; }
+  50% { transform: translateY(-300px) translateX(24px) scale(1); }
+  88% { opacity: 1; }
+  100% { transform: translateY(-640px) translateX(-18px) scale(1.15); opacity: 0; }
+}
+
+@keyframes marquee {
+  to { transform: translateX(-50%); }
+}
+
+@keyframes ripple {
+  0% { transform: scale(1); opacity: 0.8; }
+  100% { transform: scale(1.25, 1.35); opacity: 0; }
+}
+
+@keyframes ring {
+  0%, 60%, 100% { transform: rotate(0); }
+  66% { transform: rotate(-16deg); }
+  72% { transform: rotate(14deg); }
+  78% { transform: rotate(-10deg); }
+  84% { transform: rotate(8deg); }
+}
+
+@keyframes kenburns {
+  0%, 100% { transform: scale(1) translate(0, 0); }
+  50% { transform: scale(1.08) translate(-1.5%, -1%); }
+}
+
+.flow > img {
+  animation: kenburns 24s ease-in-out infinite;
+}
+
+.kicker::before {
+  transform-origin: left;
+  animation: grow 1.2s var(--ease) both;
+}
+
+@keyframes grow {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+@keyframes navDrop {
+  from { opacity: 0; transform: translateY(-40px) scale(0.96); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes rim {
+  to { background-position: 300% 0; }
+}
+
+@keyframes wiggle {
+  0%, 100% { transform: rotate(0); }
+  25% { transform: rotate(-18deg) scale(1.15); }
+  60% { transform: rotate(14deg) scale(1.15); }
+}
+
+@keyframes waveHand {
+  0%, 60%, 100% { transform: rotate(0); }
+  10%, 30% { transform: rotate(16deg); }
+  20%, 40% { transform: rotate(-10deg); }
+  50% { transform: rotate(8deg); }
+}

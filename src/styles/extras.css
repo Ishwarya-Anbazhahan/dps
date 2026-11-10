@@ -1,0 +1,59 @@
+/* ---------- Extra website animations ---------- */
+@keyframes grad-move { to { background-position: 200% center; } }
+@keyframes pop { 0% { transform: scale(0); } 70% { transform: scale(1.25); } 100% { transform: scale(1); } }
+@keyframes underline-grow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes glow-ring { 0%, 100% { box-shadow: 0 0 0 0 rgba(193, 39, 45, 0.45); } 50% { box-shadow: 0 0 0 10px rgba(193, 39, 45, 0); } }
+@keyframes border-spin { to { --angle: 360deg; } }
+@property --angle { syntax: "<angle>"; initial-value: 0deg; inherits: false; }
+
+/* Hero headline: moving colour on the highlighted words */
+.hero h1 em {
+  background: linear-gradient(100deg, var(--red), var(--gold), var(--blue), var(--red));
+  background-size: 250% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: grad-move 6s linear infinite;
+}
+
+/* Main call-to-action gently pulses */
+.hero .btn-red { animation: riseIn 0.9s var(--ease) 0.3s both, glow-ring 2.4s ease-in-out 1.5s infinite; }
+.hero .btn-line:last-child { border-color: var(--blue); }
+
+/* Hero facts lift on hover */
+.facts > div { transition: transform 0.3s var(--ease); }
+.facts > div:hover { transform: translateY(-5px); }
+
+/* Headings draw an underline as they appear */
+.section h2, .flow-card h2 { position: relative; padding-bottom: 12px; }
+.section h2::after, .flow-card h2::after {
+  content: ""; position: absolute; left: 0; bottom: 0; width: 72px; height: 4px; border-radius: 4px;
+  background: linear-gradient(90deg, var(--red), var(--gold)); transform-origin: left;
+  animation: underline-grow 1s var(--ease) 0.3s both;
+}
+
+/* Tick marks pop in one after another */
+.flow-points .tick { animation: pop 0.5s var(--ease) both; animation-delay: calc(var(--i, 0) * 180ms + 600ms); }
+.flow-points li { transition: transform 0.3s var(--ease); }
+.flow-points li:hover { transform: translateX(8px); }
+
+/* Service cards: rotating colour border on hover */
+.service-grid .card { position: relative; }
+.service-grid .card:hover { transform: translateY(-10px); }
+.service-grid .card > * { position: relative; z-index: 1; }
+
+/* "Client Login" in the menu becomes a button */
+.nav-links a:last-of-type[href="/portal"] {
+  background: var(--red); color: #fff; border-radius: 999px; padding-inline: 18px;
+  animation: glow-ring 2.4s ease-in-out infinite;
+}
+.nav-links a:last-of-type[href="/portal"]:hover { background: var(--red-deep); transform: translateY(-2px); }
+
+/* Smooth image zoom on the brand pictures */
+.about-art img, .flow > img { transition: transform 1.2s var(--ease); }
+.about-art:hover img { transform: scale(1.05) rotate(-1deg); }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero h1 em, .hero .btn-red, .flow-points .tick, .section h2::after, .flow-card h2::after, .nav-links a[href="/portal"] { animation: none !important; }
+  .hero h1 em { -webkit-text-fill-color: initial; color: var(--red); background: none; }
+}
